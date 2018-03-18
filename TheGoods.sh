@@ -1,14 +1,8 @@
-#DISCLAIMER; you should add the following paths to your system to allow for the proper loging and collection of the scans. Feel free to change them to your own unique file hierarchy.
-      /path/to/original/script.sh
-      /BadMuffin/ScanLogs/FoundHosts
-      /BadMuffin/ScanLogs/ScannedHosts
-
-
-
+#Windows blocking ICMP traffic? Just use ARP!
 
 #!/bin/bash
-> /BadMuffin/ScanLogs/FoundHosts
-> /BadMuffin/ScanLogs/ScannedHosts
+> /ScanLogs/FoundHosts
+> /ScanLogs/ScannedHosts
 
 arp-scan --localnet --numeric --quiet --ignoredups | awk '{print $1}' | grep -v 
 Starting | grep -v Interface | grep -v packets | grep -v Ending | grep -v respon
@@ -22,17 +16,17 @@ echo "Looking for Common Ports..."
 
 echo "Found Ports;"
 
-cat /BadMuffin/ScanLogs/ScannedHosts| grep -n 445
-cat /BadMuffin/ScanLogs/ScannedHosts| grep -n 23
-cat /BadMuffin/ScanLogs/ScannedHosts| grep -n 22
-cat /BadMuffin/ScanLogs/ScannedHosts| grep -n 135
-cat /BadMuffin/ScanLogs/ScannedHosts| grep -n 8080
-cat /BadMuffin/ScanLogs/ScannedHosts| grep -n 3306
-cat /BadMuffin/ScanLogs/ScannedHosts| grep -n 548
+grep -n 445 /ScanLogs/ScannedHost
+grep -n 23 /ScanLogs/ScannedHost
+grep -n 22 /ScanLogs/ScannedHost
+grep -n 135 /ScanLogs/ScannedHost
+grep -n 8080 /ScanLogs/ScannedHost
+grep -n 3306 /ScanLogs/ScannedHost
+grep -n 548 /ScanLogs/ScannedHost
 
-cp /BadMuffin/ScanLogs/ScannedHosts /BadMuffin/ScanLogs/ScannedHosts.1
+cp /ScanLogs/ScannedHosts /ScanLogs/ScannedHosts.1
 
-cp /BadMuffin/ScanLogs/FoundHosts /BadMuffin/ScanLogs/FoundHosts.1
+cp /ScanLogs/FoundHosts /ScanLogs/FoundHosts.1
 
 > /BadMuffin/ScanLogs/FoundHosts
 > /BadMuffin/ScanLogs/ScannedHosts
